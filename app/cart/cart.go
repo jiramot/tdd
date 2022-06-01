@@ -3,8 +3,9 @@ package cart
 import "github.com/jiramot/tdd/app/product"
 
 type Cart struct {
-	Items      []orderItem
-	TotalPrice float64
+	Items       []orderItem
+	TotalPrice  float64
+	RemovedItem []removeProductItem
 }
 
 type orderItem struct {
@@ -12,8 +13,12 @@ type orderItem struct {
 	Quantity int
 }
 
+type removeProductItem struct {
+	Product product.Product
+}
+
 func NewCard() *Cart {
-	return &Cart{TotalPrice: 0.0, Items: make([]orderItem, 0)}
+	return &Cart{TotalPrice: 0.0, Items: make([]orderItem, 0), RemovedItem: make([]removeProductItem, 0)}
 }
 
 func (c *Cart) RemoveItem(product product.Product) *Cart {
@@ -23,6 +28,9 @@ func (c *Cart) RemoveItem(product product.Product) *Cart {
 			newItems = append(newItems, item)
 		}
 	}
+
+	removeProductItems := removeProductItem{Product: product}
+	c.RemovedItem = append(c.RemovedItem, removeProductItems)
 	c.Items = newItems
 	return c
 }
