@@ -16,6 +16,17 @@ func NewCard() *Cart {
 	return &Cart{TotalPrice: 0.0, Items: make([]orderItem, 0)}
 }
 
+func (c *Cart) RemoveItem(product product.Product) *Cart {
+	var newItems []orderItem
+	for _, item := range c.Items {
+		if item.Product.Name != product.Name {
+			newItems = append(newItems, item)
+		}
+	}
+	c.Items = newItems
+	return c
+}
+
 func (c *Cart) Add(product product.Product, quantity int) *Cart {
 	item := orderItem{Product: product, Quantity: quantity}
 	c.Items = append(c.Items, item)

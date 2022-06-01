@@ -52,3 +52,18 @@ func TestAddRiceCookerTwoQuantityToCart(t *testing.T) {
 		t.Errorf("expect quantity %v but got %v", 2, c.Items[0].Quantity)
 	}
 }
+
+func TestRemoveItemFromCart(t *testing.T) {
+	ipad := product.NewProduct("ipad1", 5000)
+	appleWatch := product.NewProduct("appleWatch", 15000)
+
+	c := NewCard()
+	c.Add(ipad, 1)
+	c.Add(appleWatch, 1)
+
+	c.RemoveItem(ipad)
+
+	if c.Items[0].Product.Name != "appleWatch" {
+		t.Errorf("expect product %v but got %v", appleWatch.Name, c.Items[0].Product.Name)
+	}
+}
