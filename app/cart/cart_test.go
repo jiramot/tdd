@@ -8,10 +8,9 @@ import (
 
 func TestSumTotalPriceWhenAddNewProductToCart(t *testing.T) {
 	ipad := product.NewProduct("ipad", 10000)
-	orderItem := OrderItem{Product: ipad, Quantity: 1}
 
 	c := NewCard()
-	c.Add(orderItem)
+	c.Add(ipad, 1)
 
 	if c.TotalPrice != 10000 {
 		t.Errorf("expect total price %v but got %v", 10000, c.TotalPrice)
@@ -21,10 +20,9 @@ func TestSumTotalPriceWhenAddNewProductToCart(t *testing.T) {
 
 func TestAddNewProductToCart(t *testing.T) {
 	ipad := product.NewProduct("ipad", 10000)
-	orderItem := OrderItem{Product: ipad, Quantity: 1}
 
 	c := NewCard()
-	c.Add(orderItem)
+	c.Add(ipad, 1)
 
 	if c.Items[0].Product.Name != "ipad" {
 		t.Errorf("expect first product name %v but got %v", "ipad", c.Items[0].Product.Name)
@@ -34,10 +32,9 @@ func TestAddNewProductToCart(t *testing.T) {
 
 func TestAddAppleWatchToCart(t *testing.T) {
 	appleWatch := product.NewProduct("apple watch", 10000)
-	orderItem := OrderItem{Product: appleWatch, Quantity: 1}
 
 	c := NewCard()
-	c.Add(orderItem)
+	c.Add(appleWatch, 1)
 	if len(c.Items) != 1 {
 		t.Errorf("expect no product in cart %v but got %v", 1, len(c.Items))
 	}
@@ -45,10 +42,9 @@ func TestAddAppleWatchToCart(t *testing.T) {
 
 func TestAddRiceCookerTwoQuantityToCart(t *testing.T) {
 	riceCooker := product.NewProduct("rice cooker", 5000)
-	orderItem := OrderItem{Product: riceCooker, Quantity: 2}
 
 	c := NewCard()
-	c.Add(orderItem)
+	c.Add(riceCooker, 2)
 	if len(c.Items) != 1 {
 		t.Errorf("expect no product in cart %v but got %v", 1, len(c.Items))
 	}
