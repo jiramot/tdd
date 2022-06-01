@@ -7,7 +7,7 @@ import (
 )
 
 func TestAddNewProductToCart(t *testing.T) {
-	ipad := product.NewProduct("ipad", 10000)
+	ipad := product.NewProduct("ipad", 10000, 1)
 
 	c := NewCart()
 	c.Add(ipad, 1)
@@ -19,7 +19,7 @@ func TestAddNewProductToCart(t *testing.T) {
 }
 
 func TestAddAppleWatchToCart(t *testing.T) {
-	appleWatch := product.NewProduct("apple watch", 10000)
+	appleWatch := product.NewProduct("apple watch", 10000, 0.5)
 
 	c := NewCart()
 	c.Add(appleWatch, 1)
@@ -29,7 +29,7 @@ func TestAddAppleWatchToCart(t *testing.T) {
 }
 
 func TestAddRiceCookerTwoQuantityToCart(t *testing.T) {
-	riceCooker := product.NewProduct("rice cooker", 5000)
+	riceCooker := product.NewProduct("rice cooker", 5000, 1)
 
 	c := NewCart()
 	c.Add(riceCooker, 2)
@@ -42,8 +42,8 @@ func TestAddRiceCookerTwoQuantityToCart(t *testing.T) {
 }
 
 func TestRemoveItemFromCart(t *testing.T) {
-	ipad := product.NewProduct("ipad1", 5000)
-	appleWatch := product.NewProduct("appleWatch", 15000)
+	ipad := product.NewProduct("ipad1", 5000, 1)
+	appleWatch := product.NewProduct("appleWatch", 15000, 0.5)
 
 	c := NewCart()
 	c.Add(ipad, 1)
@@ -57,8 +57,8 @@ func TestRemoveItemFromCart(t *testing.T) {
 }
 
 func TestShowRemoveItem(t *testing.T) {
-	ipad := product.NewProduct("ipad", 5000)
-	appleWatch := product.NewProduct("appleWatch", 15000)
+	ipad := product.NewProduct("ipad", 5000, 1)
+	appleWatch := product.NewProduct("appleWatch", 15000, 0.5)
 
 	c := NewCart()
 	c.Add(ipad, 1)
@@ -68,31 +68,5 @@ func TestShowRemoveItem(t *testing.T) {
 
 	if c.RemovedItem[0].Product.Name != "ipad" {
 		t.Errorf("expect product %v but got %v", ipad.Name, c.RemovedItem[0].Product.Name)
-	}
-}
-
-func TestCheckOutOrder(t *testing.T) {
-	ipad := product.NewProduct("ipad", 5000)
-
-	c := NewCart()
-	c.Add(ipad, 1)
-
-	order := c.CheckOut()
-
-	if order.OrderItem[0].Product.Name != "ipad" {
-		t.Errorf("expect product %v but got %v", ipad.Name, order.OrderItem[0].Product.Name)
-	}
-}
-
-func TestCheckOutCart(t *testing.T) {
-	ipad := product.NewProduct("ipad", 5000)
-
-	c := NewCart()
-	c.Add(ipad, 1)
-
-	c.CheckOut()
-
-	if len(c.Items) != 0 {
-		t.Errorf("expect cart %v but got %v", 0, len(c.Items))
 	}
 }

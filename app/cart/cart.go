@@ -1,7 +1,6 @@
 package cart
 
 import (
-	"github.com/jiramot/tdd/app/order"
 	"github.com/jiramot/tdd/app/product"
 )
 
@@ -41,14 +40,4 @@ func (c *Cart) Add(product product.Product, quantity int) *Cart {
 	item := orderItem{Product: product, Quantity: quantity}
 	c.Items = append(c.Items, item)
 	return c
-}
-
-func (c *Cart) CheckOut() *order.Order {
-	o := order.NewOrder()
-	for _, cartItem := range c.Items {
-		o.Add(cartItem.Product, cartItem.Quantity)
-	}
-	c.Items = make([]orderItem, 0)
-
-	return o
 }
