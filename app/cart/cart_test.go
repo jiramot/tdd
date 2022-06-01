@@ -6,18 +6,6 @@ import (
 	"github.com/jiramot/tdd/app/product"
 )
 
-func TestSumTotalPriceWhenAddNewProductToCart(t *testing.T) {
-	ipad := product.NewProduct("ipad", 10000)
-
-	c := NewCard()
-	c.Add(ipad, 1)
-
-	if c.TotalPrice != 10000 {
-		t.Errorf("expect total price %v but got %v", 10000, c.TotalPrice)
-	}
-
-}
-
 func TestAddNewProductToCart(t *testing.T) {
 	ipad := product.NewProduct("ipad", 10000)
 
